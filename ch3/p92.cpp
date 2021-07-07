@@ -20,32 +20,35 @@ int main(){
     int first = v[n-1];
     int second = v[n-2];
 
-    // int count1 = 0;
-    // int count2 = 0;
-
-    // while(m > 0){
-    //     for(int i = 0; i < k; i++){
-    //         count1 += 1;
-    //         m -= 1;
-    //         if (m == 0)
-    //             break;
-    //     }
-    //     count2 += 1;
-    //     m -= 1;
-    // }
-
-    // int result = 0;
-    // result += first*count1;
-    // result += second*count2;
-    //ddd
-
-    // 가장 큰 수가 더해지는 횟수 계산
-    int cnt = (m / (k + 1)) * k;
-    cnt += m % (k + 1);
-
     int result = 0;
-    result += cnt * first; // 가장 큰 수 더하기
-    result += (m - cnt) * second; // 두 번째로 큰 수 더하기
+
+    while(1){
+        if (m >= k){
+            for(int i = 0; i < k; i++){
+                result += first;
+                m -= 1;
+            }
+            if (m > 0)
+                result += second;
+                m -= 1;
+        } else{
+            for(int i = 0; i < m; i++){
+                result += first;
+            }
+            break;
+        }
+    }
 
     cout<<"답: "<<result<<endl;
+
+    // 모범 답안
+    // 가장 큰 수가 더해지는 횟수 계산
+    // int cnt = (m / (k + 1)) * k;
+    // cnt += m % (k + 1);
+
+    // int result = 0;
+    // result += cnt * first; // 가장 큰 수 더하기
+    // result += (m - cnt) * second; // 두 번째로 큰 수 더하기
+
+    // cout<<"답: "<<result<<endl;
 }
