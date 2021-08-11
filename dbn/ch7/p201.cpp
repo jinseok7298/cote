@@ -34,7 +34,7 @@ int main(){
 
     }
 
-    cout<<max;
+    cout<<max<<endl;
 
 
     return 0;
