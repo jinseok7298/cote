@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -16,6 +17,8 @@ int main(){
         v.push_back(x);
     }
 
+    sort(v.begin(), v.end());
+
     for (int i = 1; i <= m; i++){
         for (int j = 0; j < n; j++){
             if (i == v[j]) {        //화폐 가치와 금액 일치하는 경우
@@ -28,15 +31,17 @@ int main(){
                 break;
             }
 
-            if (d[i] <= 0 && d[i - v[j]] == -1){     //화폐로 원하는 금액을 만드느게 불가능한 경우
+            if (i - v[j] < 0) break;
+
+            if (d[i - v[j]] == -1 && d[i] == 0){     //화폐로 원하는 금액을 만드느게 불가능한 경우
                 d[i] = -1;
             }
-            else if (d[i - v[j]] != -1){
-                if (d[i] <= 0 && i - v[j] > 0) {       //원하는 금액을 만드는게 가능한 경우
+            else if (d[i - v[j]] != -1) {
+                if (d[i] <= 0) {       //원하는 금액을 만드는게 가능한 경우
                     d[i] = d[i - v[j]] + 1;
                 }
-                else{
-                    d[i] = min(d[i], d[i - v[j]] + 1);      //다른 경우와 비교해서 적은 횟수로 기록
+                else{ 
+                    d[i] = min(d[i], d[i - v[j]] + 1);      //다른 가능한 경우가 있을 때 비교해서 적은 횟수로 기록
                 }
             }
             //cout<<"j = "<<j<<"반복문"<<d[i]<<endl;
